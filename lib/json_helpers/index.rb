@@ -1,9 +1,5 @@
 module JsonHelpers
   module Index
-    def is_json_type(file)
-      '.json' == File.extname(file)
-    end
-
     def json_file_name(file)
       File.basename(file).gsub(/\.json/, '')
     end

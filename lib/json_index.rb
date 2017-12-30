@@ -14,11 +14,6 @@ class JsonIndex
 
   def initialize
     @files = Dir[JSON_FILES_PATH].map do |file_path|
-
-      unless is_json_type(file_path)
-        raise "Invalid File - #{file_path}. It should be JSON type."
-      end
-
       { file: File.read(file_path),
         path: file_path,
         name: json_file_name(file_path) }
