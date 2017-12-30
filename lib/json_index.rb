@@ -2,9 +2,12 @@ require 'json'
 require 'active_support'
 require 'activerecord-import'
 require './lib/json_search'
+require './lib/json_helpers/index'
 
 class JsonIndex
   attr_reader :files
+
+  include JsonHelpers::Index
 
   JSON_FILES_PATH = './json_files/*.json'
   VALUES_SEPARATOR = '||'
@@ -55,14 +58,6 @@ class JsonIndex
     index_data
   end
 
-  def is_json_type(file)
-    '.json' == File.extname(file)
-  end
-
-  def json_file_name(file)
-    File.basename(file).gsub(/\.json/, '')
-  end
-
   # Returns JSONSearch object having all the field to be bulk imported into the DB
   def get_json_search_object(json_data, file_name)
     values_string = VALUES_SEPARATOR
@@ -74,22 +69,5 @@ class JsonIndex
     end
 
     JsonSearch.new(search_values: values_string, json_data: json_data, json_data_type: file_name)
-  end
-
-  # Returns nested array / hash values as plan array of strings.
-  def parse_nested_values(values)
-    parsed_values = []
-
-    if values.is_a?(Hash)
-      parsed_values |= parse_nested_values(values.values)
-    elsif values.is_a?(Array)
-      values.each do |value|
-        parsed_values |= parse_nested_values(value)
-      end
-    else
-      parsed_values |= [values.to_s]
-    end
-
-    parsed_values
   end
 end
