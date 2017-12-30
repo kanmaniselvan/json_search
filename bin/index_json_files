@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require './lib/json_index'
+
+JsonIndex.new.index_files
