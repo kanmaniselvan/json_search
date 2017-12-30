@@ -1,7 +1,7 @@
 module JsonHelpers
   module Search
     def get_sanitized_key(key, perform_ljust=true)
-      key_string = key.tr('_', ' ').capitalize.strip
+      key_string = key.to_s.tr('_', ' ').capitalize.strip
       perform_ljust ? key_string.ljust(30) : key_string
     end
 
@@ -24,9 +24,11 @@ module JsonHelpers
           value_string += "\n#{intend_space}#{get_sanitized_key(key, false)} => #{get_readable_nested_values(_value, intend_space)}"
         end
       elsif value.is_a?(Array)
-        value_string += value.join(', ')
+        value.each do |_value|
+          value_string += get_readable_nested_values(_value, intend_space)
+        end
       else
-        value_string += value.to_s
+        value_string += "#{value.to_s} "
       end
 
       value_string

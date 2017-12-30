@@ -9,11 +9,11 @@ class JsonSearch < ActiveRecord::Base
   validates_uniqueness_of :search_values
 
   def self.search(keyword)
-    results = JsonSearch.where('LOWER(search_values) like ?', "%#{get_separated_joined_keyword(keyword)}%")
+    results = JsonSearch.where('LOWER(search_values) like ?', "%#{get_separator_joined_keyword(keyword)}%")
     results.empty? ? 'No results.' : get_human_readable_format(results)
   end
 
-  def self.get_separated_joined_keyword(keyword)
+  def self.get_separator_joined_keyword(keyword)
     "#{::JsonIndex::VALUES_SEPARATOR}#{keyword}#{::JsonIndex::VALUES_SEPARATOR}"
   end
 
