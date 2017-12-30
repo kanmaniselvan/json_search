@@ -33,7 +33,7 @@ RSpec.describe JsonSearch do
                    ] } ]
       }
 
-      expect(JsonSearch.get_readable_nested_values(nested_json)).to eq("\n     A => 1 2 \n     B => \n          C => 3 4 5 \n          D => \n               Name => min \n          Address => hello \n     C => q v \n          Food => max \n          Result => \n               Super => fat ")
+      expect(JsonSearch.get_readable_nested_values(nested_json)).to eq("\n                                A => 1 2 \n                                B => \n                                                                C => 3 4 5 \n                                                                D => \n                                                                                                Name => min \n                                                                Address => hello \n                                C => q v \n                                                                Food => max \n                                                                Result => \n                                                                                                Super => fat ")
     end
   end
 

@@ -3,4 +3,3 @@
 require './lib/json_search'
 
 puts JsonSearch.search(ARGV[0].to_s.downcase)
-

@@ -18,7 +18,7 @@ module JsonHelpers
       value_string = ""
 
       if value.is_a?(Hash)
-        intend_space += "     "
+        intend_space += "     ".rjust(32)
 
         value.each do |key, _value|
           value_string += "\n#{intend_space}#{get_sanitized_key(key, false)} => #{get_readable_nested_values(_value, intend_space)}"
