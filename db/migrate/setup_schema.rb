@@ -1,5 +1,3 @@
-require './db/connection'
-
 if ActiveRecord::Base.connection.table_exists?(:json_searches)
   ActiveRecord::Base.connection.drop_table :json_searches
 end

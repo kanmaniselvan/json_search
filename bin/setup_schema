@@ -1,3 +1,4 @@
 #!/usr/bin/env ruby
 
+require './db/connection'
 require './db/migrate/setup_schema'
